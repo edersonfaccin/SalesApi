@@ -4,7 +4,7 @@ export class CompanyDto {
 
     @IsString({ message: 'Nome deve ser do tipo string' })
     @IsNotEmpty({ message: 'Informe o Nome' })
-    @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 20 caracteres' })
+    @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 100 caracteres' })
     name?: string
 
     @Length(1, 50, { message: 'O campo CNPJ deve ter de 1 a 50 caracteres' })

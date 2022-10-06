@@ -14,16 +14,7 @@ export class CountryService {
 
     async findAll(): Promise<CountryDto[]> {
         try {
-            return this.countryRepository.find({
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
-                }
-            });
+            return this.countryRepository.find({});
         } catch (error) {
             return error;
         }
@@ -34,14 +25,6 @@ export class CountryService {
             return await this.countryRepository.findOne({ 
                 where: { 
                     id: id 
-                },
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
                 }
             })
         } catch (error) {

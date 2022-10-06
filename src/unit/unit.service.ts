@@ -14,16 +14,7 @@ export class UnitService {
 
     async findAll(): Promise<UnitDto[]> {
         try {
-            return this.companyRepository.find({
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
-                }
-            });
+            return this.companyRepository.find({});
         } catch (error) {
             return error;
         }
@@ -34,14 +25,6 @@ export class UnitService {
             return await this.companyRepository.findOne({ 
                 where: { 
                     id: id 
-                },
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
                 }
             })
         } catch (error) {

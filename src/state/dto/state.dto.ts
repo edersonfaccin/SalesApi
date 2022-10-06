@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, Length } from 'class-validator';
 
-export class UnitDto {
+export class StateDto {
 
     @IsNotEmpty({ message: 'Informe a companhia' })
     idcompany?: string
@@ -10,10 +10,13 @@ export class UnitDto {
     @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 100 caracteres' })
     name?: string
 
-    @Length(1, 10, { message: 'O campo Sigla deve ter de 1 a 10 caracteres' })
-    @IsString({ message: 'Sigla deve ser do tipo string' })
-    @IsNotEmpty({ message: 'Informe o Sigla' })
-    initials?: string
+    @IsString({ message: 'UF deve ser do tipo string' })
+    @IsNotEmpty({ message: 'Informe o UF' })
+    @Length(1, 2, { message: 'O campo UF deve ter de 1 a 2 caracteres' })
+    uf?: string
+
+    @IsNotEmpty({ message: 'Informe o pais' })
+    idcountry?: string
 
     active?: boolean
 }

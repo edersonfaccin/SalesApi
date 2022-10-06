@@ -7,7 +7,7 @@ export class CategoryDto {
 
     @IsString({ message: 'Nome deve ser do tipo string' })
     @IsNotEmpty({ message: 'Informe o Nome' })
-    @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 20 caracteres' })
+    @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 100 caracteres' })
     name?: string
 
     active?: boolean

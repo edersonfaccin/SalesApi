@@ -14,16 +14,7 @@ export class CategoryService {
 
     async findAll(): Promise<CategoryDto[]> {
         try {
-            return this.categoryRepository.find({
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
-                }
-            });
+            return this.categoryRepository.find({});
         } catch (error) {
             return error;
         }
@@ -34,14 +25,6 @@ export class CategoryService {
             return await this.categoryRepository.findOne({ 
                 where: { 
                     id: id 
-                },
-                loadRelationIds: true,
-                relations: [
-                    'idcompany'
-                ],
-                select: {
-                    id: true,
-                    name: true
                 }
             })
         } catch (error) {

@@ -6,6 +6,7 @@ import { CompanyModule } from './company/company.module';
 import { UnitModule } from './unit/unit.module';
 import { CategoryModule } from './category/category.module';
 import { CountryModule } from './country/country.module';
+import { StateModule } from './state/state.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { CountryModule } from './country/country.module';
     CompanyModule,
     UnitModule,
     CategoryModule,
-    CountryModule
+    CountryModule,
+    StateModule
   ],
   controllers: [
     AppController
