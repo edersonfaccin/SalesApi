@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class CompanyDto {
 
@@ -48,4 +48,6 @@ export class CompanyDto {
     @Length(1, 100, { message: 'O campo Email deve ter de 1 a 100 caracteres' })
     @IsString({ message: 'Email deve ser do tipo string' })
     email?: string
+
+    active?: boolean
 }

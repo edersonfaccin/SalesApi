@@ -34,4 +34,7 @@ export class Company {
 
     @Column({ length: 100 })
     email: string
+
+    @Column({ default: true })
+    active: boolean
 }
