@@ -1,11 +1,13 @@
 import { Company } from 'src/company/entities/company.entity';
-import { Country } from 'src/country/entities/country.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
-export class State {
+export class Bank {
     @PrimaryGeneratedColumn('uuid')
     id: string
+
+    @Column({ length: 15 })
+    bank_number: string
 
     @ManyToOne(() => Company, {
         cascade: true, 
@@ -16,13 +18,6 @@ export class State {
 
     @Column({ length: 100 })
     name: string
-
-    @Column({ length: 2 })
-    uf: string
-
-    @ManyToOne(() => Country)
-    @JoinColumn({ name: 'idcountry', referencedColumnName: 'id' })
-    idcountry: string
 
     @Column({ default: true })
     active: boolean

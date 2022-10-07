@@ -1,0 +1,4 @@
+import { BankDto } from "./bank.dto";
+import { PartialType } from "@nestjs/mapped-types"
+
+export class BankPartialDto extends PartialType(BankDto) {}

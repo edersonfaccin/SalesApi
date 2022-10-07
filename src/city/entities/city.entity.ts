@@ -17,10 +17,7 @@ export class City {
     @Column({ length: 100 })
     name: string
 
-    @ManyToOne(() => State, {
-        cascade: true, 
-        onDelete: 'CASCADE'
-    })
+    @ManyToOne(() => State)
     @JoinColumn({ name: 'idstate', referencedColumnName: 'id' })
     idstate: string
 
