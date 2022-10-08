@@ -15,10 +15,7 @@ export class CarrierPixKeyService {
     async findAll(): Promise<CarrierPixKeyDto[]> {
         try {
             return this.carrierPixKeyRepository.find({
-                loadRelationIds: true,
-                relations: [
-                    'idcity'
-                ]
+                loadRelationIds: true
             });
         } catch (error) {
             return error;
@@ -31,11 +28,19 @@ export class CarrierPixKeyService {
                 where: { 
                     id: id 
                 },
-                loadRelationIds: true,
-                relations: [
-                    'idcity'
-                ]
+                loadRelationIds: true
             })
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async findAllByCarrier(id: string): Promise<CarrierPixKeyDto[]> {
+        try {
+            let query = this.carrierPixKeyRepository.createQueryBuilder('carrier_pix_key')
+            query.where(`carrier_pix_key.idcarrier = '${id}'`)
+
+            return query.getMany()
         } catch (error) {
             return error;
         }

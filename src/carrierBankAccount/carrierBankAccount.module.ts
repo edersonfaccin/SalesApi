@@ -3,7 +3,6 @@ import { DatabaseModule } from 'src/database/database.module';
 import { CarrierBankAccountController } from './carrierBankAccount.controller';
 import { carrierBankAccountProviders } from './carrierBankAccount.providers';
 import { CarrierBankAccountService } from './carrierBankAccount.service';
-import { CarrierBankAccount } from './entities/carrierBankAccount.entity';
 
 @Module({
   imports: [
@@ -17,8 +16,7 @@ import { CarrierBankAccount } from './entities/carrierBankAccount.entity';
     ...carrierBankAccountProviders,
   ],
   exports: [
-    CarrierBankAccountService,
-    CarrierBankAccount
+    CarrierBankAccountService
   ]
 })
 export class CarrierBankAccountModule {}

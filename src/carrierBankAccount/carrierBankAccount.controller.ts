@@ -31,6 +31,13 @@ export class CarrierBankAccountController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/carrier/:id')
+    async findAllByCarrier(@Res() response, @Param('id') id) {
+        const data = await this.carrierBankAccountService.findAllByCarrier(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: CarrierBankAccountPartialDto, @Param('id') id): Promise<CarrierBankAccountDto> {
         const oldData = await this.carrierBankAccountService.findOne(id);

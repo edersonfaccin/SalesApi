@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { validate } from 'class-validator';
-import { CarrierBankAccount } from 'src/carrierBankAccount/entities/carrierBankAccount.entity';
-import { CarrierPixKey } from 'src/carrierPixKey/entities/carrierPixKey.entity';
+import { CarrierBankAccountService } from 'src/carrierBankAccount/carrierBankAccount.service';
+import { CarrierPixKeyService } from 'src/carrierPixKey/carrierPixKey.service';
 import { Repository } from 'typeorm';
 import { CarrierDto } from './dto/carrier.dto';
 import { CarrierPartialDto } from './dto/carrierPartial.dto';
@@ -12,16 +12,14 @@ export class CarrierService {
     constructor(
         @Inject('CARRIER_REPOSITORY') 
         private carrierRepository: Repository<Carrier>,
-        @Inject('CARRIER_BANK_ACCOUNT_REPOSITORY') 
-        private carrierBankAccountRepository: Repository<CarrierBankAccount>,
-        @Inject('CARRIER_PIX_KEY_REPOSITORY')
-        private carrierPixKeyRepository: Repository<CarrierPixKey>
+        private readonly carrierBankAccountService: CarrierBankAccountService,
+        private readonly carrierPixKeyService: CarrierPixKeyService
     ) {}
 
     async findAll(): Promise<CarrierDto[]> {
         try {
             return this.carrierRepository.find({
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idcity'
                 ]
@@ -37,7 +35,7 @@ export class CarrierService {
                 where: { 
                     id: id 
                 },
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idcity'
                 ]
@@ -66,7 +64,7 @@ export class CarrierService {
                         account_number: item.account_number,
                         type_account: item.type_account
                     }
-                    promises.push(this.carrierBankAccountRepository.save(newItem))
+                    promises.push(this.carrierBankAccountService.create(newItem))
                 })
 
                 data.pix_keys.map(item => {
@@ -76,7 +74,7 @@ export class CarrierService {
                         key: item.key
                     }
 
-                    promises.push(this.carrierPixKeyRepository.save(newItem))
+                    promises.push(this.carrierPixKeyService.create(newItem))
                 })
 
                 Promise.all(promises).then((_) => {
@@ -86,7 +84,6 @@ export class CarrierService {
                 })
                 
                 return dataCarrier
-                //return this.carrierRepository.save(data)
             }
         } catch (error) {
             return error;

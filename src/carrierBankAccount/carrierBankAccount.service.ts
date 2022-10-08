@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { validate } from 'class-validator';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { CarrierBankAccountDto } from './dto/carrierBankAccount.dto';
 import { CarrierBankAccountPartialDto } from './dto/carrierBankAccountPartial.dto';
 import { CarrierBankAccount } from './entities/carrierBankAccount.entity';
@@ -36,6 +36,18 @@ export class CarrierBankAccountService {
                     'idbank'
                 ]
             })
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async findAllByCarrier(id: string): Promise<CarrierBankAccountDto[]> {
+        try {
+            let query = this.carrierBankAccountRepository.createQueryBuilder('carrier_bank_account')
+            query.leftJoinAndSelect('carrier_bank_account.idbank', 'bank')
+            query.where(`carrier_bank_account.idcarrier = '${id}'`)
+
+            return query.getMany()
         } catch (error) {
             return error;
         }

@@ -31,6 +31,13 @@ export class CarrierPixKeyController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/carrier/:id')
+    async findAllByCarrier(@Res() response, @Param('id') id) {
+        const data = await this.carrierPixKeyService.findAllByCarrier(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: CarrierPixKeyPartialDto, @Param('id') id): Promise<CarrierPixKeyDto> {
         const oldData = await this.carrierPixKeyService.findOne(id);
