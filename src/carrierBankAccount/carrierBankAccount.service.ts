@@ -15,7 +15,7 @@ export class CarrierBankAccountService {
     async findAll(): Promise<CarrierBankAccountDto[]> {
         try {
             return this.carrierBankAccountRepository.find({
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idbank'
                 ]
@@ -31,7 +31,7 @@ export class CarrierBankAccountService {
                 where: { 
                     id: id 
                 },
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idbank'
                 ]

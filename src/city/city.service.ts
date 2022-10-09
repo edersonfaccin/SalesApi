@@ -15,16 +15,10 @@ export class CityService {
     async findAll(): Promise<CityDto[]> {
         try {
             return this.cityRepository.find({
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idstate'
-                ],
-                select: {
-                    id: true,
-                    name: true,
-                    active: true,
-                    idcompany: true
-                }
+                ]
             });
         } catch (error) {
             return error;
@@ -37,16 +31,10 @@ export class CityService {
                 where: { 
                     id: id 
                 },
-                loadRelationIds: true,
+                loadRelationIds: false,
                 relations: [
                     'idstate'
-                ],
-                select: {
-                    id: true,
-                    name: true,
-                    active: true,
-                    idcompany: true
-                }
+                ]
             })
         } catch (error) {
             return error;

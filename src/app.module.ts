@@ -12,6 +12,7 @@ import { BankModule } from './bank/bank.module';
 import { CarrierModule } from './carrier/carrier.module';
 import { CarrierBankAccountModule } from './carrierBankAccount/carrierBankAccount.module';
 import { CarrierPixKeyModule } from './carrierPixKey/carrierPixKey.module';
+import { IcmsTableModule } from './icmsTable/icmsTable.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { CarrierPixKeyModule } from './carrierPixKey/carrierPixKey.module';
     BankModule,
     CarrierModule,
     CarrierBankAccountModule,
-    CarrierPixKeyModule
+    CarrierPixKeyModule,
+    IcmsTableModule
   ],
   controllers: [
     AppController

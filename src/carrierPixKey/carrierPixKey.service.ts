@@ -15,7 +15,7 @@ export class CarrierPixKeyService {
     async findAll(): Promise<CarrierPixKeyDto[]> {
         try {
             return this.carrierPixKeyRepository.find({
-                loadRelationIds: true
+                loadRelationIds: false
             });
         } catch (error) {
             return error;
@@ -28,7 +28,7 @@ export class CarrierPixKeyService {
                 where: { 
                     id: id 
                 },
-                loadRelationIds: true
+                loadRelationIds: false
             })
         } catch (error) {
             return error;

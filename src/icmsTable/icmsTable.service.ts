@@ -1,23 +1,24 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
-import { StateDto } from './dto/state.dto';
-import { StatePartialDto } from './dto/statePartial.dto';
-import { State } from './entities/state.entity';
+import { IcmsTableDto } from './dto/icmsTable.dto';
+import { IcmsTablePartialDto } from './dto/icmsTablePartial.dto';
+import { IcmsTable } from './entities/icmsTable.entity';
 
 @Injectable()
-export class StateService {
+export class IcmsTableService {
     constructor(
-        @Inject('STATE_REPOSITORY')
-        private stateRepository: Repository<State>,
+        @Inject('ICMS_TABLE_REPOSITORY')
+        private icmsTableRepository: Repository<IcmsTable>,
     ) {}
 
-    async findAll(): Promise<StateDto[]> {
+    async findAll(): Promise<IcmsTableDto[]> {
         try {
-            return this.stateRepository.find({
+            return this.icmsTableRepository.find({
                 loadRelationIds: false,
                 relations: [
-                    'idcountry'
+                    'idstate_origin',
+                    'idstate_destination'
                 ]
             });
         } catch (error) {
@@ -25,15 +26,16 @@ export class StateService {
         }
     }
 
-    async findOne(id: string): Promise<StateDto> {
+    async findOne(id: string): Promise<IcmsTableDto> {
         try {
-            return await this.stateRepository.findOne({ 
+            return await this.icmsTableRepository.findOne({ 
                 where: { 
                     id: id 
                 },
                 loadRelationIds: false,
                 relations: [
-                    'idcountry'
+                    'idstate_origin',
+                    'idstate_destination'
                 ]
             })
         } catch (error) {
@@ -41,21 +43,21 @@ export class StateService {
         }
     }
     
-    async create(data: StateDto): Promise<StateDto> {
+    async create(data: IcmsTableDto): Promise<IcmsTableDto> {
         try {
             const errors = await validate(data)
     
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                return this.stateRepository.save(data)
+                return this.icmsTableRepository.save(data)
             }
         } catch (error) {
             return error;
         }
     }
     
-    async update(oldData: StateDto, newValues: StatePartialDto): Promise<StateDto> {
+    async update(oldData: IcmsTableDto, newValues: IcmsTablePartialDto): Promise<IcmsTableDto> {
         const updatedData = oldData;
 
         try {
@@ -68,7 +70,7 @@ export class StateService {
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                return await this.stateRepository.save(updatedData);
+                return await this.icmsTableRepository.save(updatedData);
             }
         } catch (error) {
             return error;
@@ -77,7 +79,7 @@ export class StateService {
 
     async delete(id: string) {
         try {
-            return await this.stateRepository.delete(id);
+            return await this.icmsTableRepository.delete(id);
         } catch (error) {
             return error
         }
