@@ -22,6 +22,7 @@ import { PaymentConditionInstallmentModule } from './paymentConditionInstallment
 import { ColorModule } from './color/color.module';
 import { ProductModule } from './product/product.module';
 import { SupplierModule } from './supplier/supplier.module';
+import { PaymentMethodModule } from './paymentMethod/paymentMethod.module';
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { SupplierModule } from './supplier/supplier.module';
     PaymentConditionInstallmentModule,
     ColorModule,
     ProductModule,
-    SupplierModule
+    SupplierModule,
+    PaymentMethodModule
   ],
   controllers: [
     AppController
