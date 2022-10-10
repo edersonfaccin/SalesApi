@@ -1,18 +1,15 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, 
-    Res, UseGuards, Request } from "@nestjs/common";
+    Res, Request } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { UserDto } from "./dto/user.dto";
 import { UserPartialDto } from "./dto/userPartial.dto";
 import { ApiTags } from "@nestjs/swagger"
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from "src/auth/auth.service";
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
     constructor(
-        private readonly userService: UserService,
-        private authService: AuthService
+        private readonly userService: UserService
     ){}
 
     @Post()
@@ -44,10 +41,8 @@ export class UserController {
         return await this.userService.delete(id);
     }
 
-    @UseGuards(AuthGuard('local'))
     @Post('login')
     async login(@Request() req) {
-        return req.user
-        return this.authService.login(req.body)
+        return await this.userService.login(req.body)
     }
 }

@@ -5,12 +5,14 @@ import { User } from './entities/user.entity';
 import { UserDto } from './dto/user.dto';
 import { UserPartialDto } from './dto/userPartial.dto';
 import * as bcrypt from 'bcrypt'
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<User>,
+    private authservice: AuthService
   ) {}
 
   async findAll(): Promise<UserDto[]> {
@@ -42,9 +44,14 @@ export class UserService {
     }
   }
 
-  async findOneByEmail(idcompany: string, email: string): Promise<UserDto | undefined> {
+  async findOneByEmail(idcompany: string, email: string): Promise<UserDto> {
     try {
-      return await this.userRepository.findOneBy({ email, idcompany })
+      return await this.userRepository.createQueryBuilder(`user`)
+        .select()
+        .andWhere(`email = '${email}'`)
+        .andWhere(`idcompany = '${idcompany}'`)
+        .printSql()
+        .getOne()
     } catch (error) {
       return error;
     }
@@ -98,6 +105,35 @@ export class UserService {
       return await this.userRepository.delete(id);
     } catch (error) {
       return error
+    }
+  }
+
+  async login(user: UserDto): Promise<string>{
+    const resultUser = await this.validateUser(user.idcompany, user.email, user.password)
+
+    if(resultUser){
+      return this.authservice.generateJWT(resultUser)
+    }else{
+      return "Informations incorrectes !";          
+    }
+  }
+
+  async validateUser(idcompany: string, email: string, password: string): Promise<any | UserDto>{
+    const user = await this.findOneByEmail(idcompany, email)
+
+    if(user){
+      if(user.active){
+        if(await this.authservice.comparePasswords(password, user.password)){
+          return user
+        }else{
+          return null
+        }
+      }else{
+        throw new Error("User inactive");
+        
+      }
+    }else{
+      throw new Error("User not found");
     }
   }
 }
