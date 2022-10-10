@@ -65,7 +65,7 @@ export class Saler {
     email: string
 
     @Column({ default: 30 })
-    payment_shipping_days: number
+    sales_commission_percent: number
 
     @Column({ default: true })
     active: boolean

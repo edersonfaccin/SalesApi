@@ -64,9 +64,6 @@ export class Supplier {
     @Column({ length: 100, nullable: true })
     email: string
 
-    @Column({ default: 30 })
-    payment_shipping_days: number
-
     @Column({ default: true })
     active: boolean
 }

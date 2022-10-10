@@ -23,6 +23,9 @@ import { ColorModule } from './color/color.module';
 import { ProductModule } from './product/product.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { PaymentMethodModule } from './paymentMethod/paymentMethod.module';
+import { CfopModule } from './cfop/cfop.module';
+import { OrderModule } from './order/order.module';
+import { OrderItemModule } from './orderItem/orderItem.module';
 
 @Module({
   imports: [
@@ -47,7 +50,10 @@ import { PaymentMethodModule } from './paymentMethod/paymentMethod.module';
     ColorModule,
     ProductModule,
     SupplierModule,
-    PaymentMethodModule
+    PaymentMethodModule,
+    CfopModule,
+    OrderModule,
+    OrderItemModule
   ],
   controllers: [
     AppController

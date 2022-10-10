@@ -72,9 +72,6 @@ export class CustomerDto {
     @IsOptional()
     email?: string
 
-    @IsNumber()
-    payment_shipping_days?: number
-
     @IsArray()
     accounts?: any[]
 

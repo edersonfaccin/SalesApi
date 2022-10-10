@@ -72,8 +72,8 @@ export class SalerDto {
     @IsOptional()
     email?: string
 
-    @IsNumber()
-    payment_shipping_days?: number
+    @IsNotEmpty({ message: 'Informe o percentual comissao' })
+    sales_commission_percent?: number
 
     @IsArray()
     accounts?: any[]
