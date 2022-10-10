@@ -1,28 +1,28 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
-import { UnitDto } from './dto/unit.dto';
-import { UnitPartialDto } from './dto/unitPartial.dto';
-import { Unit } from './entities/unit.entity';
+import { ColorDto } from './dto/color.dto';
+import { ColorPartialDto } from './dto/colorPartial.dto';
+import { Color } from './entities/color.entity';
 
 @Injectable()
-export class UnitService {
+export class ColorService {
     constructor(
-        @Inject('UNIT_REPOSITORY')
-        private unitRepository: Repository<Unit>,
+        @Inject('COLOR_REPOSITORY')
+        private colorRepository: Repository<Color>,
     ) {}
 
-    async findAll(): Promise<UnitDto[]> {
+    async findAll(): Promise<ColorDto[]> {
         try {
-            return this.unitRepository.find({});
+            return this.colorRepository.find({});
         } catch (error) {
             return error;
         }
     }
 
-    async findOne(id: string): Promise<UnitDto> {
+    async findOne(id: string): Promise<ColorDto> {
         try {
-            return await this.unitRepository.findOne({ 
+            return await this.colorRepository.findOne({ 
                 where: { 
                     id: id 
                 }
@@ -32,21 +32,21 @@ export class UnitService {
         }
     }
     
-    async create(data: UnitDto): Promise<UnitDto> {
+    async create(data: ColorDto): Promise<ColorDto> {
         try {
             const errors = await validate(data)
     
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                return this.unitRepository.save(data)
+                return this.colorRepository.save(data)
             }
         } catch (error) {
             return error;
         }
     }
     
-    async update(oldData: UnitDto, newValues: UnitPartialDto): Promise<UnitDto> {
+    async update(oldData: ColorDto, newValues: ColorPartialDto): Promise<ColorDto> {
         const updatedData = oldData;
 
         try {
@@ -59,7 +59,7 @@ export class UnitService {
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                return await this.unitRepository.save(updatedData);
+                return await this.colorRepository.save(updatedData);
             }
         } catch (error) {
             return error;
@@ -68,7 +68,7 @@ export class UnitService {
 
     async delete(id: string) {
         try {
-            return await this.unitRepository.delete(id);
+            return await this.colorRepository.delete(id);
         } catch (error) {
             return error
         }

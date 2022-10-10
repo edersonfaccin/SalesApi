@@ -19,6 +19,7 @@ import { SalerModule } from './saler/saler.module';
 import { CustomerModule } from './customer/customer.module';
 import { PaymentConditionModule } from './paymentCondition/paymentCondition.module';
 import { PaymentConditionInstallmentModule } from './paymentConditionInstallment/paymentConditionInstallment.module';
+import { ColorModule } from './color/color.module';
 
 @Module({
   imports: [
@@ -39,7 +40,8 @@ import { PaymentConditionInstallmentModule } from './paymentConditionInstallment
     SalerModule,
     CustomerModule,
     PaymentConditionModule,
-    PaymentConditionInstallmentModule
+    PaymentConditionInstallmentModule,
+    ColorModule
   ],
   controllers: [
     AppController
