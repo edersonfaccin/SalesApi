@@ -1,10 +1,13 @@
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator';
-import { TypePerson } from '../entities/saler.entity';
+import { TypePerson } from '../entities/supplier.entity';
 
-export class SalerDto {
+export class SupplierDto {
 
     @IsNotEmpty({ message: 'Informe a companhia' })
     idcompany?: string
+
+    @IsNotEmpty({ message: 'Informe o representante' })
+    idsupplier?: string
 
     @IsString({ message: 'Corporate name deve ser do tipo string' })
     @IsNotEmpty({ message: 'Informe o Corporate name' })

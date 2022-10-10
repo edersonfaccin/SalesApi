@@ -20,6 +20,8 @@ import { CustomerModule } from './customer/customer.module';
 import { PaymentConditionModule } from './paymentCondition/paymentCondition.module';
 import { PaymentConditionInstallmentModule } from './paymentConditionInstallment/paymentConditionInstallment.module';
 import { ColorModule } from './color/color.module';
+import { ProductModule } from './product/product.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 @Module({
   imports: [
@@ -41,7 +43,9 @@ import { ColorModule } from './color/color.module';
     CustomerModule,
     PaymentConditionModule,
     PaymentConditionInstallmentModule,
-    ColorModule
+    ColorModule,
+    ProductModule,
+    SupplierModule
   ],
   controllers: [
     AppController

@@ -13,7 +13,7 @@ export enum TypeAccount {
 }
 
 @Entity()
-export class Saler {
+export class Supplier {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
