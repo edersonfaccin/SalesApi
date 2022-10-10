@@ -1,20 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
-import { CarrierBankAccountDto } from './dto/carrierBankAccount.dto';
-import { CarrierBankAccountPartialDto } from './dto/carrierBankAccountPartial.dto';
-import { CarrierBankAccount } from './entities/carrierBankAccount.entity';
+import { CustomerBankAccountDto } from './dto/customerBankAccount.dto';
+import { CustomerBankAccountPartialDto } from './dto/customerBankAccountPartial.dto';
+import { CustomerBankAccount } from './entities/customerBankAccount.entity';
 
 @Injectable()
-export class CarrierBankAccountService {
+export class CustomerBankAccountService {
     constructor(
-        @Inject('CARRIER_BANK_ACCOUNT_REPOSITORY') 
-        private carrierBankAccountRepository: Repository<CarrierBankAccount>
+        @Inject('CUSTOMER_BANK_ACCOUNT_REPOSITORY') 
+        private customerBankAccountRepository: Repository<CustomerBankAccount>
     ) {}
 
-    async findAll(): Promise<CarrierBankAccountDto[]> {
+    async findAll(): Promise<CustomerBankAccountDto[]> {
         try {
-            return this.carrierBankAccountRepository.find({
+            return this.customerBankAccountRepository.find({
                 loadRelationIds: false,
                 relations: [
                     'idbank'
@@ -25,9 +25,9 @@ export class CarrierBankAccountService {
         }
     }
 
-    async findOne(id: string): Promise<CarrierBankAccountDto> {
+    async findOne(id: string): Promise<CustomerBankAccountDto> {
         try {
-            return await this.carrierBankAccountRepository.findOne({ 
+            return await this.customerBankAccountRepository.findOne({ 
                 where: { 
                     id: id 
                 },
@@ -41,11 +41,11 @@ export class CarrierBankAccountService {
         }
     }
 
-    async findAllByCarrier(id: string): Promise<CarrierBankAccountDto[]> {
+    async findAllByCustomer(id: string): Promise<CustomerBankAccountDto[]> {
         try {
-            let query = this.carrierBankAccountRepository.createQueryBuilder('carrier_bank_account')
-            query.leftJoinAndSelect('carrier_bank_account.idbank', 'bank')
-            query.where(`carrier_bank_account.idcarrier = '${id}'`)
+            let query = this.customerBankAccountRepository.createQueryBuilder('customer_bank_account')
+            query.leftJoinAndSelect('customer_bank_account.idbank', 'bank')
+            query.where(`customer_bank_account.idcustomer = '${id}'`)
 
             return query.getMany()
         } catch (error) {
@@ -53,21 +53,21 @@ export class CarrierBankAccountService {
         }
     }
 
-    async create(data: CarrierBankAccountDto): Promise<CarrierBankAccountDto> {
+    async create(data: CustomerBankAccountDto): Promise<CustomerBankAccountDto> {
         try {
             const errors = await validate(data)
     
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                return await this.carrierBankAccountRepository.save(data)
+                return await this.customerBankAccountRepository.save(data)
             }
         } catch (error) {
             return error;
         }
     }
     
-    async update(oldData: CarrierBankAccountDto, newValues: CarrierBankAccountPartialDto): Promise<CarrierBankAccountDto> {
+    async update(oldData: CustomerBankAccountDto, newValues: CustomerBankAccountPartialDto): Promise<CustomerBankAccountDto> {
         const updatedData = oldData;
 
         try {
@@ -80,7 +80,7 @@ export class CarrierBankAccountService {
             if (errors.length > 0) {
                 throw new Error(`Validation failed!`)
             } else {
-                //return await this.carrierBankAccountRepository.save(updatedData);
+                //return await this.customerBankAccountRepository.save(updatedData);
             }
         } catch (error) {
             return error;
@@ -89,7 +89,7 @@ export class CarrierBankAccountService {
 
     async delete(id: string) {
         try {
-            return await this.carrierBankAccountRepository.delete(id);
+            return await this.customerBankAccountRepository.delete(id);
         } catch (error) {
             return error
         }

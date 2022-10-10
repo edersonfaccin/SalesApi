@@ -15,6 +15,8 @@ import { CarrierPixKeyModule } from './carrierPixKey/carrierPixKey.module';
 import { IcmsTableModule } from './icmsTable/icmsTable.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { SalerModule } from './saler/saler.module';
+import { CustomerModule } from './customer/customer.module';
 
 @Module({
   imports: [
@@ -31,7 +33,9 @@ import { UserModule } from './user/user.module';
     CarrierPixKeyModule,
     IcmsTableModule,
     AuthModule,
-    UserModule
+    UserModule,
+    SalerModule,
+    CustomerModule
   ],
   controllers: [
     AppController
