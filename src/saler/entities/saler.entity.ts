@@ -21,6 +21,10 @@ export class Saler {
     @JoinColumn({ name: 'idcompany', referencedColumnName: 'id' })
     idcompany: string
 
+    @ManyToOne(() => Saler)
+    @JoinColumn({ name: 'idsaler', referencedColumnName: 'id' })
+    idsaler: string
+
     @Column({ length: 100 })
     corporate_name: string
 

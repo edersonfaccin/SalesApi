@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/database/database.module';
-import { customerPixKeyController } from './customerPixKey.controller';
+import { CustomerPixKeyController } from './customerPixKey.controller';
 import { customerPixKeyProviders } from './customerPixKey.providers';
-import { customerPixKeyService } from './customerPixKey.service';
+import { CustomerPixKeyService } from './customerPixKey.service';
 
 @Module({
   imports: [
     DatabaseModule
   ],
   controllers: [
-    customerPixKeyController
+    CustomerPixKeyController
   ],
   providers: [
-    customerPixKeyService, 
+    CustomerPixKeyService, 
     ...customerPixKeyProviders,
   ],
   exports: [
-    customerPixKeyService
+    CustomerPixKeyService
   ]
 })
-export class customerPixKeyModule {}
+export class CustomerPixKeyModule {}

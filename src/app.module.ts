@@ -17,6 +17,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { SalerModule } from './saler/saler.module';
 import { CustomerModule } from './customer/customer.module';
+import { PaymentConditionModule } from './paymentCondition/paymentCondition.module';
+import { PaymentConditionInstallmentModule } from './paymentConditionInstallment/paymentConditionInstallment.module';
 
 @Module({
   imports: [
@@ -35,7 +37,9 @@ import { CustomerModule } from './customer/customer.module';
     AuthModule,
     UserModule,
     SalerModule,
-    CustomerModule
+    CustomerModule,
+    PaymentConditionModule,
+    PaymentConditionInstallmentModule
   ],
   controllers: [
     AppController

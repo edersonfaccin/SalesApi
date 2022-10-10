@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/database/database.module';
-import { salerPixKeyController } from './salerPixKey.controller';
+import { SalerPixKeyController } from './salerPixKey.controller';
 import { salerPixKeyProviders } from './salerPixKey.providers';
-import { salerPixKeyService } from './salerPixKey.service';
+import { SalerPixKeyService } from './salerPixKey.service';
 
 @Module({
   imports: [
     DatabaseModule
   ],
   controllers: [
-    salerPixKeyController
+    SalerPixKeyController
   ],
   providers: [
-    salerPixKeyService, 
+    SalerPixKeyService, 
     ...salerPixKeyProviders,
   ],
   exports: [
-    salerPixKeyService
+    SalerPixKeyService
   ]
 })
-export class salerPixKeyModule {}
+export class SalerPixKeyModule {}

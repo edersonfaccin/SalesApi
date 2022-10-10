@@ -6,6 +6,9 @@ export class SalerDto {
     @IsNotEmpty({ message: 'Informe a companhia' })
     idcompany?: string
 
+    @IsNotEmpty({ message: 'Informe o representante' })
+    idsaler?: string
+
     @IsString({ message: 'Corporate name deve ser do tipo string' })
     @IsNotEmpty({ message: 'Informe o Corporate name' })
     @Length(1, 100, { message: 'O campo Corporate name deve ter de 1 a 100 caracteres' })
