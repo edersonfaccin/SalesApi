@@ -26,6 +26,9 @@ import { PaymentMethodModule } from './paymentMethod/paymentMethod.module';
 import { CfopModule } from './cfop/cfop.module';
 import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './orderItem/orderItem.module';
+import { InvoiceModule } from './invoice/invoice.module';
+import { InvoiceItemModule } from './invoiceItem/invoiceItem.module';
+import { InvoiceBillingModule } from './invoiceBilling/invoiceBilling.module';
 
 @Module({
   imports: [
@@ -53,7 +56,10 @@ import { OrderItemModule } from './orderItem/orderItem.module';
     PaymentMethodModule,
     CfopModule,
     OrderModule,
-    OrderItemModule
+    OrderItemModule,
+    InvoiceModule,
+    InvoiceItemModule,
+    InvoiceBillingModule
   ],
   controllers: [
     AppController

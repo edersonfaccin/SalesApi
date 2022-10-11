@@ -1,10 +1,10 @@
 import { Company } from 'src/company/entities/company.entity';
-import { Order } from 'src/order/entities/order.entity';
+import { Invoice } from 'src/invoice/entities/invoice.entity';
 import { Product } from 'src/product/entities/product.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
-export class OrderItem {
+export class InvoiceItem {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
@@ -12,28 +12,16 @@ export class OrderItem {
     @JoinColumn({ name: 'idcompany', referencedColumnName: 'id' })
     idcompany: string
 
-    @ManyToOne(() => Order, { cascade: true,  onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'idorder', referencedColumnName: 'id' })
-    idorder: string
+    @ManyToOne(() => Invoice, { cascade: true,  onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'idinvoice', referencedColumnName: 'id' })
+    idinvoice: string
 
     @ManyToOne(() => Product)
     @JoinColumn({ name: 'idproduct', referencedColumnName: 'id' })
     idproduct: string
 
     @Column({ default: 0 })
-    amount_ordered: number
-
-    @Column({ default: 0 })
-    amount_invoiced: number
-
-    @Column({ default: 0 })
-    amount_reserved: number
-
-    @Column({ default: 0 })
-    amount_balance: number
-
-    @Column({ default: 0 })
-    amount_served: number
+    amount: number
 
     @Column({ default: 0 })
     value: number
