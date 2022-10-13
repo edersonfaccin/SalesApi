@@ -31,6 +31,13 @@ export class ColorController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.colorService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: ColorPartialDto, @Param('id') id): Promise<ColorDto> {
         const oldData = await this.colorService.findOne(id);

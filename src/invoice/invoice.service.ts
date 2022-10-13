@@ -9,7 +9,7 @@ import { Invoice } from './entities/invoice.entity';
 @Injectable()
 export class InvoiceService {
     constructor(
-        @Inject('ORDER_REPOSITORY')
+        @Inject('INVOICE_REPOSITORY')
         private invoiceRepository: Repository<Invoice>,
         private readonly invoiceItemService: InvoiceItemService
     ) {}

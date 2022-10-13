@@ -11,7 +11,7 @@ export class InvoiceBillingService {
         @Inject('INVOICE_BILLING_REPOSITORY')
         private invoiceBillingRepository: Repository<InvoiceBilling>,
     ) {}
-
+/* 
     async findAll(): Promise<InvoiceBillingDto[]> {
         try {
             return this.invoiceBillingRepository.find({
@@ -39,7 +39,7 @@ export class InvoiceBillingService {
         } catch (error) {
             return error;
         }
-    }
+    } */
     
     async create(data: InvoiceBillingDto): Promise<InvoiceBillingDto> {
         try {

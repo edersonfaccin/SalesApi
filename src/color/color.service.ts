@@ -20,6 +20,17 @@ export class ColorService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<ColorDto[]> {
+        try {
+            let query = this.colorRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<ColorDto> {
         try {
             return await this.colorRepository.findOne({ 

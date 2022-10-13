@@ -17,25 +17,25 @@ export class InvoiceBillingController {
     }
 
     //@UseGuards(JwtAuthGuard)
-    @Get()
+    /* @Get()
     async fetchAll(@Res() response) {
         const list = await this.invoiceBillingService.findAll();
         return response.status(HttpStatus.OK).json(list)
-    }
+    } */
 
     //@UseGuards(JwtAuthGuard)
-    @Get('/:id')
+    /* @Get('/:id')
     async findById(@Res() response, @Param('id') id) {
         const data = await this.invoiceBillingService.findOne(id)
         return response.status(HttpStatus.OK).json(data)
-    }
+    } */
 
     //@UseGuards(JwtAuthGuard)
-    @Patch(':id')
+    /* @Patch(':id')
     async update(@Body() updatedData: InvoiceBillingPartialDto, @Param('id') id): Promise<InvoiceBillingDto> {
         const oldData = await this.invoiceBillingService.findOne(id);
         return await this.invoiceBillingService.update(oldData, updatedData);
-    }
+    } */
 
     //@UseGuards(JwtAuthGuard)
     @Delete(':id')

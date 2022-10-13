@@ -44,14 +44,17 @@ export class UserService {
     }
   }
 
-  async findOneByEmail(idcompany: string, email: string): Promise<UserDto> {
+  async findOneByEmail(email: string): Promise<UserDto> {
     try {
-      return await this.userRepository.createQueryBuilder(`user`)
-        .select()
-        .andWhere(`email = '${email}'`)
-        .andWhere(`idcompany = '${idcompany}'`)
-        .printSql()
-        .getOne()
+      return await this.userRepository.findOne({ 
+        where: { 
+          email: email 
+        },
+        loadRelationIds: false,
+        relations: [
+          'idcompany'
+        ]
+      })
     } catch (error) {
       return error;
     }
@@ -109,7 +112,7 @@ export class UserService {
   }
 
   async login(user: UserDto): Promise<string>{
-    const resultUser = await this.validateUser(user.idcompany, user.email, user.password)
+    const resultUser = await this.validateUser(user.email, user.password)
 
     if(resultUser){
       return this.authservice.generateJWT(resultUser)
@@ -118,8 +121,8 @@ export class UserService {
     }
   }
 
-  async validateUser(idcompany: string, email: string, password: string): Promise<any | UserDto>{
-    const user = await this.findOneByEmail(idcompany, email)
+  async validateUser(email: string, password: string): Promise<any | UserDto>{
+    const user = await this.findOneByEmail(email)
 
     if(user){
       if(user.active){
@@ -130,7 +133,6 @@ export class UserService {
         }
       }else{
         throw new Error("User inactive");
-        
       }
     }else{
       throw new Error("User not found");

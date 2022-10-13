@@ -1,7 +1,7 @@
 import { Company } from 'src/company/entities/company.entity';
 import { Invoice } from 'src/invoice/entities/invoice.entity';
 import { PaymentMethod } from 'src/paymentMethod/entities/paymentMethod.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 
 export enum TypeStatusInvoiceBilling {
     OPENED = 'OPENED',
@@ -22,7 +22,7 @@ export class InvoiceBilling {
     @JoinColumn({ name: 'idinvoice', referencedColumnName: 'id' })
     idinvoice: string
 
-    @Column({ default: new Date(1900, 0, 1)})
+    @Column('datetime')
     dueDate: Date
 
     @Column({ default: 0 })
@@ -32,10 +32,10 @@ export class InvoiceBilling {
     @JoinColumn({ name: 'idpayment_method', referencedColumnName: 'id' })
     idpayment_method: string
 
-    @Column({ default: new Date(1900, 0, 1)})
+    @Column('datetime')
     paymentDate: Date
 
-    @Column({ default: new Date(1900, 0, 1)})
+    @Column('datetime')
     cancellationDate: Date
 
     @Column({ default: TypeStatusInvoiceBilling.OPENED })
