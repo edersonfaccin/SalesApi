@@ -31,6 +31,13 @@ export class CategoryController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.categoryService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: CategoryPartialDto, @Param('id') id): Promise<CategoryDto> {
         const oldData = await this.categoryService.findOne(id);

@@ -20,6 +20,17 @@ export class CategoryService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CategoryDto[]> {
+        try {
+            let query = this.categoryRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CategoryDto> {
         try {
             return await this.categoryRepository.findOne({ 
