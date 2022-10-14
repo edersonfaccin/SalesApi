@@ -27,8 +27,9 @@ export class StateService {
 
     async findAllByCompany(idcompany: string): Promise<StateDto[]> {
         try {
-            let query = this.stateRepository.createQueryBuilder('company')
-            query.where(`company.idcompany = '${idcompany}'`)
+            let query = this.stateRepository.createQueryBuilder('state')
+            query.leftJoinAndSelect('state.idcountry', 'country')
+            query.where(`state.idcompany = '${idcompany}'`)
 
             return query.getMany()
         } catch (error) {
