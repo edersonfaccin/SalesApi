@@ -24,6 +24,13 @@ export class CustomerController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.customerService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Get('/:id')
     async findById(@Res() response, @Param('id') id) {
         const data = await this.customerService.findOne(id)

@@ -20,6 +20,17 @@ export class UnitService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<UnitDto[]> {
+        try {
+            let query = this.unitRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<UnitDto> {
         try {
             return await this.unitRepository.findOne({ 

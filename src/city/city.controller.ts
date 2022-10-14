@@ -24,6 +24,13 @@ export class CityController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.cityService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Get('/:id')
     async findById(@Res() response, @Param('id') id) {
         const data = await this.cityService.findOne(id)

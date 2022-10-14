@@ -29,6 +29,17 @@ export class CustomerService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CustomerDto[]> {
+        try {
+            let query = this.customerRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CustomerDto> {
         try {
             return await this.customerRepository.findOne({ 

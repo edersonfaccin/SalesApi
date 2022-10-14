@@ -25,6 +25,17 @@ export class StateService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<StateDto[]> {
+        try {
+            let query = this.stateRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<StateDto> {
         try {
             return await this.stateRepository.findOne({ 

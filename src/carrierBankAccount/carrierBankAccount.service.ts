@@ -25,6 +25,17 @@ export class CarrierBankAccountService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CarrierBankAccountDto[]> {
+        try {
+            let query = this.carrierBankAccountRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CarrierBankAccountDto> {
         try {
             return await this.carrierBankAccountRepository.findOne({ 

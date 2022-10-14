@@ -20,6 +20,17 @@ export class CountryService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CountryDto[]> {
+        try {
+            let query = this.countryRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CountryDto> {
         try {
             return await this.countryRepository.findOne({ 

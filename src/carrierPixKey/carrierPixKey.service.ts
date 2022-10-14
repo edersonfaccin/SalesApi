@@ -22,6 +22,17 @@ export class CarrierPixKeyService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CarrierPixKeyDto[]> {
+        try {
+            let query = this.carrierPixKeyRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CarrierPixKeyDto> {
         try {
             return await this.carrierPixKeyRepository.findOne({ 

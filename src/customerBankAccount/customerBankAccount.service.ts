@@ -25,6 +25,17 @@ export class CustomerBankAccountService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CustomerBankAccountDto[]> {
+        try {
+            let query = this.customerBankAccountRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CustomerBankAccountDto> {
         try {
             return await this.customerBankAccountRepository.findOne({ 

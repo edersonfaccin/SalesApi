@@ -22,6 +22,17 @@ export class CustomerPixKeyService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CustomerPixKeyDto[]> {
+        try {
+            let query = this.customerPixKeyRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CustomerPixKeyDto> {
         try {
             return await this.customerPixKeyRepository.findOne({ 

@@ -20,6 +20,17 @@ export class CfopService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CfopDto[]> {
+        try {
+            let query = this.cfopRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CfopDto> {
         try {
             return await this.cfopRepository.findOne({ 

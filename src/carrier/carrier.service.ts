@@ -29,6 +29,17 @@ export class CarrierService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CarrierDto[]> {
+        try {
+            let query = this.carrierRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CarrierDto> {
         try {
             return await this.carrierRepository.findOne({ 

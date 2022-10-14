@@ -26,6 +26,17 @@ export class IcmsTableService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<IcmsTableDto[]> {
+        try {
+            let query = this.icmsTableRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<IcmsTableDto> {
         try {
             return await this.icmsTableRepository.findOne({ 

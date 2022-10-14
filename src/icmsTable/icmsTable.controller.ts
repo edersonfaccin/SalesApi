@@ -24,6 +24,13 @@ export class IcmsTableController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.icmsTableService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Get('/:id')
     async findById(@Res() response, @Param('id') id) {
         const data = await this.icmsTableService.findOne(id)

@@ -25,6 +25,17 @@ export class CityService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<CityDto[]> {
+        try {
+            let query = this.cityRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<CityDto> {
         try {
             return await this.cityRepository.findOne({ 
