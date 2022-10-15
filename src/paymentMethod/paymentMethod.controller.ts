@@ -4,8 +4,8 @@ import { PaymentMethodService } from './paymentMethod.service';
 import { PaymentMethodDto } from './dto/paymentMethod.dto';
 import { PaymentMethodPartialDto } from './dto/paymentMethodPartial.dto';
 
-@ApiTags('paymentMethod')
-@Controller('paymentMethod')
+@ApiTags('payment_method')
+@Controller('payment_method')
 export class PaymentMethodController {
     constructor(private readonly paymentMethodService: PaymentMethodService){}
 
@@ -21,6 +21,13 @@ export class PaymentMethodController {
     async fetchAll(@Res() response) {
         const list = await this.paymentMethodService.findAll();
         return response.status(HttpStatus.OK).json(list)
+    }
+
+    //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.paymentMethodService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
     }
 
     //@UseGuards(JwtAuthGuard)

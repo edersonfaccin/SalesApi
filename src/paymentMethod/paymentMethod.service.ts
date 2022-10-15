@@ -20,6 +20,17 @@ export class PaymentMethodService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<PaymentMethodDto[]> {
+        try {
+            let query = this.paymentMethodRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<PaymentMethodDto> {
         try {
             return await this.paymentMethodRepository.findOne({ 
