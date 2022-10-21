@@ -31,6 +31,13 @@ export class ProductController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.productService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: ProductPartialDto, @Param('id') id): Promise<ProductDto> {
         const oldData = await this.productService.findOne(id);

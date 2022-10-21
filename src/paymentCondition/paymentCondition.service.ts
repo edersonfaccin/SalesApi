@@ -22,6 +22,17 @@ export class PaymentConditionService {
         }
     }
 
+    async findAllByCompany(idcompany: string): Promise<PaymentConditionDto[]> {
+        try {
+            let query = this.paymentConditionRepository.createQueryBuilder('company')
+            query.where(`company.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
+
     async findOne(id: string): Promise<PaymentConditionDto> {
         try {
             return await this.paymentConditionRepository.findOne({ 

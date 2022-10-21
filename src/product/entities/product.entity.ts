@@ -1,6 +1,7 @@
 import { Category } from 'src/category/entities/category.entity';
 import { Color } from 'src/color/entities/color.entity';
 import { Company } from 'src/company/entities/company.entity';
+import { Unit } from 'src/unit/entities/unit.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
@@ -31,6 +32,10 @@ export class Product {
     @ManyToOne(() => Category)
     @JoinColumn({ name: 'idcategory', referencedColumnName: 'id' })
     idcategory: string
+
+    @ManyToOne(() => Unit)
+    @JoinColumn({ name: 'idunit', referencedColumnName: 'id' })
+    idunit: string
 
     @Column({ default: 0 })
     net_weight: number

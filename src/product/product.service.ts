@@ -31,6 +31,20 @@ export class ProductService {
             return error;
         }
     }
+
+    async findAllByCompany(idcompany: string): Promise<ProductDto[]> {
+        try {
+            let query = this.productRepository.createQueryBuilder('product')
+            query.leftJoinAndSelect('product.idcategory', 'category')
+            query.leftJoinAndSelect('product.idcolor', 'color')
+            query.leftJoinAndSelect('product.idunit', 'unit')
+            query.where(`product.idcompany = '${idcompany}'`)
+
+            return query.getMany()
+        } catch (error) {
+            return error;
+        }
+    }
     
     async create(data: ProductDto): Promise<ProductDto> {
         try {

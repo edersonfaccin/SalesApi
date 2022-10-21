@@ -31,6 +31,13 @@ export class PaymentConditionController {
     }
 
     //@UseGuards(JwtAuthGuard)
+    @Get('/idcompany/:id')
+    async findByIdCompany(@Res() response, @Param('id') id) {
+        const data = await this.paymentConditionService.findAllByCompany(id)
+        return response.status(HttpStatus.OK).json(data)
+    }
+
+    //@UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(@Body() updatedData: PaymentConditionPartialDto, @Param('id') id): Promise<PaymentConditionDto> {
         const oldData = await this.paymentConditionService.findOne(id);

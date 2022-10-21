@@ -32,6 +32,18 @@
 $ npm install
 ```
 
+## Before running
+$ create file .env in root folder with the content below
+```bash
+USER=XX
+PASSWORD=XX
+HOST=XX
+DATABASE=XX
+PORTDB=XX
+
+JWT_SECRET=XXX
+```
+
 ## Running the app
 
 ```bash

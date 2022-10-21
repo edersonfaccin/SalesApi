@@ -24,7 +24,10 @@ export class ProductDto {
     idcolor?: string
 
     @IsNotEmpty({ message: 'Informe a categoria' })
-    idcategoria?: string
+    idcategory?: string
+
+    @IsNotEmpty({ message: 'Informe a unidade' })
+    idunit?: string
 
     @IsNotEmpty({ message: 'Informe o peso liquido' })
     net_weight?: number
