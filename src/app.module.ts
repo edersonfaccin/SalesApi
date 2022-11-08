@@ -29,9 +29,16 @@ import { OrderItemModule } from './orderItem/orderItem.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { InvoiceItemModule } from './invoiceItem/invoiceItem.module';
 import { InvoiceBillingModule } from './invoiceBilling/invoiceBilling.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { AppResolver } from './app.resolver';
 
 @Module({
   imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: 'schema.gql'
+    }),
     DatabaseModule, 
     CompanyModule,
     UnitModule,
@@ -65,7 +72,8 @@ import { InvoiceBillingModule } from './invoiceBilling/invoiceBilling.module';
     AppController
   ],
   providers: [
-    AppService
+    AppService,
+    AppResolver
   ],
 })
 export class AppModule {}

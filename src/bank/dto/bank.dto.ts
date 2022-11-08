@@ -1,18 +1,17 @@
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class BankDto {
 
-    @IsNotEmpty({ message: 'Informe a companhia' })
+    @Field(() => String, { description: 'Informe a companhia' })
     idcompany?: string
 
-    @IsNotEmpty({ message: 'Informe o codigo do banco' })
-    @Length(1, 15, { message: 'O campo codigo deve ter de 1 a 15 caracteres' })
+    @Field(() => String, { description: 'Informe o codigo do banco' })
     bank_number?: string
 
-    @IsString({ message: 'Nome deve ser do tipo string' })
-    @IsNotEmpty({ message: 'Informe o Nome' })
-    @Length(1, 100, { message: 'O campo Nome deve ter de 1 a 100 caracteres' })
+    @Field(() => String, { description: 'Informe o Nome' })
     name?: string
 
+    @Field(() => Boolean, { description: '', nullable: true })
     active?: boolean
 }

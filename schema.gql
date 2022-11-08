@@ -1,0 +1,42 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Bank {
+  id: String!
+
+  """Bank number"""
+  bank_number: String!
+
+  """Company identifier"""
+  idcompany: String!
+
+  """Name"""
+  name: String!
+  active: Boolean!
+}
+
+type Query {
+  getHello: String!
+  banks: [Bank!]!
+  bank(id: String!): Bank!
+}
+
+type Mutation {
+  createBank(data: BankDto!): Bank!
+  removeBank(id: String!): Bank!
+}
+
+input BankDto {
+  """Informe a companhia"""
+  idcompany: String!
+
+  """Informe o codigo do banco"""
+  bank_number: String!
+
+  """Informe o Nome"""
+  name: String!
+
+  """"""
+  active: Boolean
+}

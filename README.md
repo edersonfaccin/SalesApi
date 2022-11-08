@@ -83,3 +83,62 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## EXAMPLES GRAPHQL
+# GET
+query{
+  coins{
+    _id
+    name
+  }
+}
+
+# GET ID
+query{
+  supplier(_id: "635dab5d2b5ad8b52c3778ca"){
+    _id
+    name
+  }
+}
+
+# GET PAGE
+query{
+  supplierspage(listSupplierInput: { 
+    limit: 10,
+    offset: 0
+  }){
+    _id
+    name
+  }
+}
+
+# PATCH
+mutation{
+  updateSupplier(data:{
+    _id: "635dab5d2b5ad8b52c3778ca",
+    name: "Copaza Copos 2"
+  }){
+    _id
+    name
+  }
+}
+
+# POST
+mutation{
+  createTransaction(data:{
+    idaccount_source: "6360055d36c79d9c216ca497"
+    idaccount_target: "6360056736c79d9c216ca49a"
+  }){
+    _id
+    idaccount_source
+    idaccount_target
+  }
+}
+
+# DELETE
+mutation{
+  removeSupplier(_id: "635dab5d2b5ad8b52c3778ca"){
+    _id
+  }
+}

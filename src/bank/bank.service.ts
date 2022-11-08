@@ -31,7 +31,7 @@ export class BankService {
         }
     }
 
-    async findOne(id: string): Promise<BankDto> {
+    async findOne(id: string): Promise<BankPartialDto> {
         try {
             return await this.bankRepository.findOne({ 
                 where: { 
@@ -45,19 +45,13 @@ export class BankService {
     
     async create(data: BankDto): Promise<BankDto> {
         try {
-            const errors = await validate(data)
-    
-            if (errors.length > 0) {
-                throw new Error(`Validation failed!`)
-            } else {
-                return this.bankRepository.save(data)
-            }
+            return this.bankRepository.save(data)
         } catch (error) {
             return error;
         }
     }
     
-    async update(oldData: BankDto, newValues: BankPartialDto): Promise<BankDto> {
+    async update(oldData: BankPartialDto, newValues: BankPartialDto): Promise<BankDto> {
         const updatedData = oldData;
 
         try {

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/database/database.module';
 import { BankController } from './bank.controller';
 import { bankProviders } from './bank.providers';
+import { BankResolver } from './bank.resolver';
 import { BankService } from './bank.service';
 
 @Module({
@@ -13,6 +14,7 @@ import { BankService } from './bank.service';
   ],
   providers: [
     BankService, 
+    BankResolver,
     ...bankProviders,
   ],
   exports: [
